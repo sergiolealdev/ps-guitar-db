@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 
 import com.guitar.db.model.Location;
+import com.guitar.db.repository.LocationJpaRepository;
 import com.guitar.db.repository.LocationRepository;
 
 @ContextConfiguration(locations={"classpath:com/guitar/db/applicationTests-context.xml"})
@@ -22,10 +24,18 @@ import com.guitar.db.repository.LocationRepository;
 public class LocationPersistenceTests {
 	@Autowired
 	private LocationRepository locationRepository;
+	
+	@Autowired
+	private LocationJpaRepository locationJpaRepository;
 
 	@PersistenceContext
-	private EntityManager entityManager;
+	private EntityManager entityManager; 
 
+	@Test
+	public void testJpaFind(){
+		List<Location> locations = locationJpaRepository.findAll();
+		Assert.notNull(locations);
+	}
 	@Test
 	@Transactional
 	public void testSaveAndGetAndDelete() throws Exception {
