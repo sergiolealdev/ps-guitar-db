@@ -17,7 +17,6 @@ import org.springframework.util.Assert;
 
 import com.guitar.db.model.Location;
 import com.guitar.db.repository.LocationJpaRepository;
-import com.guitar.db.repository.LocationRepository;
 
 @ContextConfiguration(locations={"classpath:com/guitar/db/applicationTests-context.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
